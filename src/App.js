@@ -1,53 +1,46 @@
 import React, { Component } from 'react';
-import House from './components/House';
-import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
+import Home from './components/Home';
+import Houses from './stateful-components/Houses';
+import PaginationButton from './components/Pagination-Button';
 import './App.css';
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
+    this.state = { // app state
       apiUrl: 'https://www.anapioficeandfire.com/api/',
-      appTitle: 'Welcome to Game of Thrones Wiki :)',
-      pagination: {
-        page: 1,
-        pageSize: 10
-      }
+      appTitle: `Alex's Game of Thrones Wiki :)`,
+      page: 1,
+      pageSize: 20,
+      paginator: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     };
-  }
-
-  async componentWillMount() {
-    const result 
-      = await fetch(`${this.state.apiUrl}houses?page=${this.state.pagination.page}&pageSize=${this.state.pagination.pageSize}`);
-    const data = await result.json();
-    this.setState({ houses: data });
-    console.log(data);
   }
 
   render() {
     return (
+      <Router>
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">{this.state.appTitle}</h1>
-        </header>
-        <div className="ui equal width celled grid">
-          {this.state.houses
-            ? this.state.houses.map(house => {
-            return <House 
-              key={house.url} 
-              houseName={house.name}
-              houseWords={house.coatOfArms}
-            />
-          })
-            : <div className="ui active transition visible inverted dimmer">
-                <div className="ui inverted text loader">Loading...</div>
-              </div>
-          }
+        <div className="ui inverted menu">
+          <a className="header item">{this.state.appTitle}</a>
+          <a className="item"><Link to="/houses">Houses</Link></a>
+          <a className="item">Characters</a>
         </div>
+        <Route exact path="/" component={Home} />
+        <Route path="/houses" component={Houses} page={this.state.page} pageSize={this.state.pageSize} />
+        { this.state.paginator.map(i => <PaginationButton paginationClicked={this.paginationClicked} key={i} page={i} />) }
       </div>
+
+      
+      </Router>
     );
   }
+
+  paginationClicked = (x) => this.setState({ page: x }, this.fetchHouses);
 }
 
 export default App;
