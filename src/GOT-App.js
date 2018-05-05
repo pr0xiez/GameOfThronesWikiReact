@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Home from './components/Home';
 import Houses from './stateful-components/Houses';
+import Footer from './components/Footer';
 import './GOT-App.css';
 
 class GOTApp extends Component {
@@ -27,6 +28,7 @@ class GOTApp extends Component {
           </div>
           <Route exact path="/" component={Home} />
           <Route path="/houses" component={Houses} />
+          <Footer />
         </div>
       </Router>
     );
