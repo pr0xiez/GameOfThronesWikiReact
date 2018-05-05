@@ -12,7 +12,7 @@ class GOTApp extends Component {
   constructor() {
     super();
     this.state = { // app state
-      appTitle: `Alex's Game of Thrones Wiki :)`,
+      appTitle: 'Game of Thrones Wiki',
     };
   }
 
@@ -21,9 +21,9 @@ class GOTApp extends Component {
       <Router>
         <div className="GOT-App">
           <div className="ui inverted menu">
-            <Link to="/" className="header item">{this.state.appTitle}</Link>
-            <Link to="/houses" className="item">Houses</Link>
-            <Link to="/characters" className="item">Characters</Link>
+            <Link to="/" className="header item" href="/">{this.state.appTitle}</Link>
+            <Link to="/houses" className="item" href="/houses">Houses</Link>
+            <Link to="/characters" className="item" href="/characters">Characters</Link>
           </div>
           <Route exact path="/" component={Home} />
           <Route path="/houses" component={Houses} />
