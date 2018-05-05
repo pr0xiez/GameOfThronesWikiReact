@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import { BrowserRouter, Route } from 'react-router-dom';
+import GOTApp from './GOT-App';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter>
-    <Route component={App} />
+    <GOTApp />
   </BrowserRouter>, 
   document.getElementById('root')
 ); // eslint-disable-line
