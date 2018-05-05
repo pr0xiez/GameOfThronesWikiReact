@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-import House from '../components/House';
+import HouseCard from '../components/House-Card';
 import PaginationButton from '../components/Pagination-Button';
 
 class Houses extends Component {
@@ -30,6 +30,7 @@ class Houses extends Component {
         },
       );
     const data = await result.json();
+    console.log(data);
     this.setState({ houses: data });
   }
 
@@ -41,10 +42,11 @@ class Houses extends Component {
         <div className="ui equal width celled grid">
           {this.state.houses
               ? this.state.houses.map(house => (
-                <House
+                <HouseCard
                   key={house.url}
                   houseName={house.name}
                   houseWords={house.coatOfArms}
+                  houseUrl={house.url}
                 />
                   ))
               : <div className="ui active transition visible inverted dimmer">

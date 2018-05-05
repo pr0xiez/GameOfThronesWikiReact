@@ -7,6 +7,7 @@ import {
 import Home from './components/Home';
 import Houses from './stateful-components/Houses';
 import Footer from './components/Footer';
+import HouseDescription from './stateful-components/House-Description';
 import './GOT-App.css';
 
 class GOTApp extends Component {
@@ -27,7 +28,8 @@ class GOTApp extends Component {
             <Link to="/characters" className="item" href="/characters">Characters</Link>
           </div>
           <Route exact path="/" component={Home} />
-          <Route path="/houses" component={Houses} />
+          <Route exact path="/houses" component={Houses} />
+          <Route path="/houses/:id" component={HouseDescription} />
           <Footer />
         </div>
       </Router>
