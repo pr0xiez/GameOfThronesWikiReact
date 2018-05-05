@@ -23,12 +23,18 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.unlisten = this.props.history.listen((location, action) => {
-      console.log("on route change");
-    });
+    console.log(this.props);
+    const { history } = this.props;
+    this.unsubscribeFromHistory = history.listen(this.handleLocationChange);
+    this.handleLocationChange(history.location);
   }
+
   componentWillUnmount() {
-      this.unlisten();
+    if (this.unsubscribeFromHistory) this.unsubscribeFromHistory();
+  }
+
+  handleLocationChange = (location) => {
+    console.log('location', location);
   }
 
   render() {
