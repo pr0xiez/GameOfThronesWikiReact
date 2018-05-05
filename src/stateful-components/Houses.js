@@ -5,12 +5,11 @@ class Houses extends Component {
   constructor(props) {
     super(props);
     this.state = {}
-    console.log(props);
   }
 
-  // componentWillMount() {
-  //   this.fetchHouses();
-  // }
+  componentWillMount() {
+    this.fetchHouses();
+  }
 
   render() { 
     return (
@@ -35,7 +34,14 @@ class Houses extends Component {
 
   fetchHouses = async () => {
     const result
-      = await fetch(`${this.props.apiUrl}houses?page=${this.props.page}&pageSize=${this.props.pageSize}`);
+      = await fetch(`${this.props.apiUrl}houses?page=${this.props.page}&pageSize=${this.props.pageSize}`, 
+        { 
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+      );
     const data = await result.json();
     this.setState({ houses: data });
   }

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  withRouter,
 } from 'react-router-dom';
 import Home from './components/Home';
 import Houses from './stateful-components/Houses';
@@ -21,26 +22,40 @@ class App extends Component {
     };
   }
 
+  componentWillMount() {
+    this.unlisten = this.props.history.listen((location, action) => {
+      console.log("on route change");
+    });
+  }
+  componentWillUnmount() {
+      this.unlisten();
+  }
+
   render() {
     return (
       <Router>
-      <div className="App">
-        <div className="ui inverted menu">
-          <a className="header item">{this.state.appTitle}</a>
-          <a className="item"><Link to="/houses">Houses</Link></a>
-          <a className="item">Characters</a>
+        <div className="App">
+          <div className="ui inverted menu">
+            <Link to="/" className="header item">{this.state.appTitle}</Link>
+            <Link to="/houses" className="item">Houses</Link>
+            <Link to="/characters" className="item">Characters</Link>
+          </div>
+          <Route exact path="/" component={Home} />
+          <Route path="/houses" render={(props => 
+            <Houses {... props } 
+              apiUrl={this.state.apiUrl} 
+              page={this.state.page} 
+              pageSize={this.state.pageSize} />
+          )} />
+          {
+            window.location.pathname !== '/' && this.state.paginator.map(i => <PaginationButton paginationClicked={this.paginationClicked} key={i} page={i} />) 
+          }
         </div>
-        <Route exact path="/" component={Home} />
-        <Route path="/houses" component={Houses} page={this.state.page} pageSize={this.state.pageSize} />
-        { this.state.paginator.map(i => <PaginationButton paginationClicked={this.paginationClicked} key={i} page={i} />) }
-      </div>
-
-      
       </Router>
     );
   }
 
-  paginationClicked = (x) => this.setState({ page: x }, this.fetchHouses);
+  paginationClicked = (x) => this.setState({ page: x });
 }
 
-export default App;
+export default withRouter(App);
