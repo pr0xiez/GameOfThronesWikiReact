@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import gotPoster from '../assets/images/Game-of-thrones-final-season-poster.jpg';
 
 class HouseCard extends Component {
   constructor(props) {
@@ -17,19 +18,26 @@ class HouseCard extends Component {
 
   render() {
     return (
-      <div className="four wide computer ten wide mobile six wide tablet column">
-        <h2>{this.props.houseName}</h2>
-        <p>{this.props.houseWords}</p>
-        <Link to={`/houses/${this.state.id}`} href={`/houses/${this.state.id}`}>See Details</Link>
+      <div className="ui 4 cards">
+        <div class="ui card">
+          <img src={gotPoster} class="ui image" alt="house" />
+          <div class="content">
+            <div class="header">{this.props.houseName}</div>
+            <div class="description">{this.props.houseWords}</div>
+          </div>
+          <div class="extra content">
+            <Link to={`/houses/${this.state.id}`} href={`/houses/${this.state.id}`}>See Details</Link>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 HouseCard.propTypes = {
-  houseName: PropTypes.string,
-  houseWords: PropTypes.string,
-  houseUrl: PropTypes.string,
+  houseName: PropTypes.string.isRequired,
+  houseWords: PropTypes.string.isRequired,
+  houseUrl: PropTypes.string.isRequired,
 };
 
 HouseCard.defaultProps = {
