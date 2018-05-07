@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HouseCard from '../components/House-Card';
+import HouseCard from './House-Card';
 import PaginationButton from '../components/Pagination-Button';
 import Fetch from '../lib/fetch';
 import Loader from '../components/Loader';
