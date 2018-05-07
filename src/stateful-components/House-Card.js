@@ -19,13 +19,13 @@ class HouseCard extends Component {
   render() {
     return (
       <div className="ui 4 cards">
-        <div class="ui card">
-          <img src={gotPoster} class="ui image" alt="house" />
-          <div class="content">
-            <div class="header">{this.props.houseName}</div>
-            <div class="description">{this.props.houseWords}</div>
+        <div className="ui card">
+          <img src={gotPoster} className="ui image" alt="house" />
+          <div className="content">
+            <div className="header">{this.props.houseName}</div>
+            <div className="description">{this.props.houseWords}</div>
           </div>
-          <div class="extra content">
+          <div className="extra content">
             <Link to={`/houses/${this.state.id}`} href={`/houses/${this.state.id}`}>See Details</Link>
           </div>
         </div>
