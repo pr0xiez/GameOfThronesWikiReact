@@ -16,7 +16,7 @@ class Characters extends Component {
   }
 
   fetchCharacters = async () => {
-    const data = await Fetch.fetchy(`characters?page=${this.state.page}&pageSize=${this.state.pageSize}`)
+    const data = await Fetch.fetchy(`characters?page=${this.state.page}&pageSize=${this.state.pageSize}`);
     this.setState({ characters: data }, () => console.log(this.state.characters));
   }
 

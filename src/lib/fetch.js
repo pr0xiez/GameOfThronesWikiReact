@@ -11,7 +11,7 @@ class Fetch {
         },
       },
     );
-    return await response.json();
+    return response.json();
   }
 }
 

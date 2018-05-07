@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Fetch from '../lib/fetch';
 import Loader from '../components/Loader';
 
@@ -6,8 +7,8 @@ class HouseDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.match.params.id
-    }
+      id: props.match.params.id,
+    };
   }
 
   componentDidMount() {
@@ -15,7 +16,7 @@ class HouseDescription extends Component {
   }
 
   fetchHouse = async () => {
-    const data = await Fetch.fetchy(`houses/${this.state.id}`)
+    const data = await Fetch.fetchy(`houses/${this.state.id}`);
     console.log(data);
     this.setState({ house: data });
   }
@@ -31,5 +32,21 @@ class HouseDescription extends Component {
     );
   }
 }
+
+HouseDescription.propTypes = {
+  match: {
+    params: {
+      id: PropTypes.number,
+    },
+  },
+};
+
+HouseDescription.defaultProps = {
+  match: {
+    params: {
+      id: 1,
+    },
+  },
+};
 
 export default HouseDescription;
