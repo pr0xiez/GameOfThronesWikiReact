@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import fetch from 'isomorphic-fetch';
 import HouseCard from '../components/House-Card';
 import PaginationButton from '../components/Pagination-Button';
+import Fetch from '../lib/fetch';
+import Loader from '../components/Loader';
 
 class Houses extends Component {
   constructor() {
     super();
     this.state = {
-      apiUrl: 'https://www.anapioficeandfire.com/api/',
       page: 1,
       pageSize: 16,
       paginator: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -19,18 +19,7 @@ class Houses extends Component {
   }
 
   fetchHouses = async () => {
-    const result
-      = await fetch(
-        `${this.state.apiUrl}houses?page=${this.state.page}&pageSize=${this.state.pageSize}`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-        },
-      );
-    const data = await result.json();
-    console.log(data);
+    const data = await Fetch.fetchy(`houses?page=${this.state.page}&pageSize=${this.state.pageSize}`);
     this.setState({ houses: data });
   }
 
@@ -39,6 +28,7 @@ class Houses extends Component {
   render() {
     return (
       <div>
+        <h2>Houses</h2>
         <div className="ui equal width celled grid">
           {this.state.houses
               ? this.state.houses.map(house => (
@@ -49,9 +39,7 @@ class Houses extends Component {
                   houseUrl={house.url}
                 />
                   ))
-              : <div className="ui active transition visible inverted dimmer">
-                <div className="ui inverted text loader">Loading...</div>
-                </div> // eslint-disable-line 
+              : <Loader />
             }
         </div>
         <div>

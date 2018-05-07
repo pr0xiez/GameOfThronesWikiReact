@@ -9,6 +9,7 @@ import Houses from './stateful-components/Houses';
 import Footer from './components/Footer';
 import HouseDescription from './stateful-components/House-Description';
 import './GOT-App.css';
+import Characters from './stateful-components/Characters';
 
 class GOTApp extends Component {
   constructor() {
@@ -30,6 +31,7 @@ class GOTApp extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/houses" component={Houses} />
           <Route path="/houses/:id" component={HouseDescription} />
+          <Route path="/characters" component={Characters} />
           <Footer />
         </div>
       </Router>
